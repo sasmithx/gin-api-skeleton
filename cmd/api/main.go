@@ -3,6 +3,7 @@ package main
 import (
 	"api-skeleton/internal/config"
 	"api-skeleton/internal/db"
+	"api-skeleton/internal/notes"
 	"api-skeleton/internal/server"
 	"fmt"
 	"log"
@@ -25,7 +26,9 @@ func main() {
 		pool.Close()
 	}()
 
-	r := server.NewRouter()
+	repo := notes.NewPostgresRepository(pool)
+	handler := notes.NewHandler(repo)
+	r := server.NewRouter(handler)
 	addr := fmt.Sprintf(":%s", cfg.Server_Port)
 	if err := r.Run(addr); err != nil {
 		log.Fatalf("server error: %v", err)
