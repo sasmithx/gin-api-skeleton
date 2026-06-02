@@ -1,0 +1,47 @@
+### API Base URL
+@baseUrl = http://localhost:8080
+@api = {{baseUrl}}/api/v1
+@noteId = 1
+
+### Health Check
+GET {{api}}/health
+
+### Create Note
+POST {{api}}/notes
+Content-Type: application/json
+
+{
+  "title": "My First Note",
+  "content": "This is the content of my first note",
+  "pinned": false
+}
+
+### Create Pinned Note
+POST {{api}}/notes
+Content-Type: application/json
+
+{
+  "title": "My First Note",
+  "content": "Remember to complete this important task",
+  "pinned": true
+}
+
+### List All Notes
+GET {{api}}/notes
+
+### Get Note by ID
+GET {{api}}/notes/{{noteId}}
+
+### Update Note
+PUT {{api}}/notes/{{noteId}}
+Content-Type: application/json
+
+{
+  "title": "Updated Note Title",
+  "content": "Updated content with more details",
+  "pinned": true
+}
+
+### Delete Note
+DELETE {{api}}/notes/{{noteId}}
+
